@@ -11,8 +11,10 @@ services:
       - ./data/html:/var/www/html
   app:
     build: ./app
+    privileged: true
     volumes:
-      - ./data/html/app/public:/var/www/html/public
+      - ./data/html/app:/var/www/html/app
+      - /var/www/html/app/node_modules
   webpack:
     build: ./webpack
     ports:
