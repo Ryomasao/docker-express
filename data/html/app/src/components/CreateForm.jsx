@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import PropTypes from 'prop-types';
 
-class SearchForm extends Component {
-  constructor() {
-    super();
+class CreateForm extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
       name: '',
       color: '',
@@ -42,26 +42,17 @@ class SearchForm extends Component {
   
   handleSubmit(e) {
     e.preventDefault();
+    let data = {
+      name:this.state.name,
+      color:this.state.color,
+    }
 
-    const URL_BASE = '//localhost:8000/api';
-    const ENTORY_POINT = `${URL_BASE}/member`;
-
-    /*
-    axios.get('//localhost:8000/api/member')
-    .then((res) => console.log(res))
-    .catch((error) => console.log(error));
-    */
-
-    const name = this.state.name;
-    const color = this.state.color;
-
-    axios.post(ENTORY_POINT, {
-      name: name,
-      color: color,
-    })
-    .then((res) => console.log(res))
-    .catch((error) => console.log(error));
+    this.props.onSubmit(data);
   }
 }
 
-export default SearchForm;
+CreateForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+}
+
+export default CreateForm;
