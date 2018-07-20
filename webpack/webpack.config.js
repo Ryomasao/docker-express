@@ -7,7 +7,7 @@ module.exports = {
   ],
   //出力先
   output: {
-    path: publidDir,
+    path: publidDir + '/js',
     filename: 'bundle.js'
   },
   // ローダーの設定
