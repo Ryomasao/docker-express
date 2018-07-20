@@ -22,3 +22,9 @@ services:
     volumes:
       - ./data/html/app/public:/webpack/public
       - ./data/html/app/src:/webpack/src
+  db:
+    image: mongo:latest
+    volumes:
+      - db-data:/data/db
+volumes:
+  db-data:

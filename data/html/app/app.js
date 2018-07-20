@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var memberRouter = require('./routes/member');
 
 var app = express();
 
@@ -26,8 +27,16 @@ app.use(function(req, res, next) {
   next();
 });
 
+// mongdbへの接続
+mongoose.connect('mongodb://db/test');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('success!!!!!!!!!!!!!');
+});
+
 app.use('/', indexRouter);
-app.use('/api', usersRouter);
+app.use('/api/member', memberRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
